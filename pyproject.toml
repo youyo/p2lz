@@ -17,7 +17,7 @@ dependencies = [
 dynamic = ["version"]
 
 [tools.setuptools.package-dir]
-2lz = "src/p2lz"
+p2lz = "src/p2lz"
 
 [tool.setuptools_scm]
 write_to = "src/p2lz/_version.py"
