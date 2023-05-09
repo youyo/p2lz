@@ -2,14 +2,13 @@ import boto3
 
 
 class DynamoDB():
-    def __init__(self, table_name: str, dynamodb: boto3.resource('dynamodb')):
-        self.dynamodb = boto3.resource('dynamodb')
-        self.table = dynamodb.Table(table_name)
+    def __init__(self, table_name: str, dynamodb: boto3.resource = boto3.resource('dynamodb', region_name='ap-northeast-1')) -> None:
+        self.dynamodb = dynamodb
+        self.table = self.dynamodb.Table(table_name)
 
     @classmethod
     def table(cls, table_name: str):
-        dynamodb = boto3.resource('dynamodb')
-        return cls(table_name, dynamodb)
+        return cls(table_name)
 
     def query(self, **kwargs):
         while True:
@@ -41,3 +40,6 @@ class DynamoDB():
     def get_item(self, **kwargs):
         resp = self.table.get_item(**kwargs)
         return resp['Item']
+
+    def delete_item(self, **kwargs):
+        return self.table.delete_item(**kwargs)
